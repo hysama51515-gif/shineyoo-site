@@ -1,52 +1,78 @@
 import Image from 'next/image';
-import { products } from '../../data/products';
+import Link from 'next/link';
+import { getProducts } from '../../lib/products';
+
+const categories = ['Bags', 'New', 'Evening', 'Accessories'];
 
 export const metadata = {
   title: 'Collection | ShineYOO',
   description: 'Explore the ShineYOO handbag collection through an editorial luxury presentation.',
 };
 
-export default function CollectionPage() {
+export default async function CollectionPage({ searchParams }) {
+  const products = await getProducts();
+  const activeCategory = searchParams?.category || 'All';
+  const visibleProducts =
+    activeCategory === 'All'
+      ? products
+      : products.filter((product) => product.category === activeCategory);
+
   return (
     <>
-      <section className="flex min-h-screen items-end bg-[#f7f0e7] px-6 pb-16 pt-28 md:px-10 lg:px-14">
-        <div className="soft-fade mx-auto w-full max-w-[1600px]">
-          <p className="text-[11px] uppercase tracking-[.44em] text-stone-500">Collection</p>
-          <h1 className="mt-8 max-w-5xl text-6xl font-semibold uppercase leading-[0.92] tracking-[.06em] text-stone-950 md:text-8xl lg:text-9xl">
-            Objects of quiet presence
+      <section className="bg-[#fdfbf7] px-5 pb-16 pt-20 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-[1600px] text-center">
+          <p className="text-[10px] uppercase tracking-[.34em] text-stone-500">Collection</p>
+          <h1 className="mx-auto mt-5 max-w-4xl text-5xl tracking-[-.055em] text-stone-950 md:text-7xl">
+            An edited catalogue of modern handbags.
           </h1>
+          <nav className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            {['All', ...categories].map((category) => (
+              <Link
+                key={category}
+                href={category === 'All' ? '/collection' : `/collection?category=${category}`}
+                className={`px-5 py-2 text-[10px] uppercase tracking-[.16em] ${
+                  activeCategory === category
+                    ? 'bg-stone-950 text-white'
+                    : 'bg-stone-100 text-stone-600 hover:text-stone-950'
+                }`}
+              >
+                {category}
+              </Link>
+            ))}
+          </nav>
         </div>
       </section>
 
-      {products.map((product, index) => (
-        <section
-          key={product.name}
-          className="group grid min-h-screen bg-[#f7f0e7] md:grid-cols-2"
-        >
-          <div className={`${index % 2 === 1 ? 'md:order-2' : ''} relative min-h-[72vh] overflow-hidden`}>
-            <Image
-              fill
-              src={product.image}
-              alt={`ShineYOO ${product.name}`}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="editorial-image object-cover"
-            />
-            <div className="absolute inset-0 bg-black/10" />
-          </div>
-
-          <div className="flex items-center px-6 py-20 md:px-12 lg:px-20">
-            <div className="fade-panel max-w-lg">
-              <p className="text-[10px] uppercase tracking-[.42em] text-stone-500">
-                {String(index + 1).padStart(2, '0')}
-              </p>
-              <h2 className="mt-8 text-5xl font-semibold leading-[0.95] tracking-[-.055em] text-stone-950 md:text-7xl">
-                {product.name}
-              </h2>
-              <p className="mt-8 text-lg font-light leading-9 text-stone-600">{product.description}</p>
-            </div>
-          </div>
-        </section>
-      ))}
+      <section className="bg-[#fdfbf7] px-5 pb-28 md:px-8 lg:px-12">
+        <div className="mx-auto grid max-w-[1700px] gap-x-5 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleProducts.map((product, index) => (
+            <Link
+              href={`/product/${product.id}`}
+              key={product.id}
+              className={`group block ${index % 5 === 0 ? 'lg:col-span-2' : ''}`}
+            >
+              <div className="relative aspect-[4/5] overflow-hidden bg-[#eeeeec]">
+                <Image
+                  fill
+                  src={product.image || product.images[0]}
+                  alt={`ShineYOO ${product.title}`}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="editorial-image object-cover"
+                />
+              </div>
+              <div className="mt-5 flex items-start justify-between gap-6">
+                <div>
+                  <h2 className="text-sm uppercase tracking-[.12em] text-stone-950">{product.title}</h2>
+                  <p className="mt-2 max-w-md text-sm font-light leading-6 text-stone-600">
+                    {product.description}
+                  </p>
+                </div>
+                <span className="text-[10px] uppercase tracking-[.16em] text-stone-400">{product.category}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
