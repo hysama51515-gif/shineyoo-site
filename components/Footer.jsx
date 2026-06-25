@@ -2,13 +2,46 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1c1c1a] px-5 py-12 text-[#f6f3ed] md:px-8 md:py-16">
-      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[2fr_1fr_1fr]">
-        <div><p className="text-lg font-bold tracking-[.22em]">SHINEYOO</p><p className="mt-5 max-w-xs text-sm leading-6 text-white/60">For the small moments that make every day feel like yours.</p></div>
-        <div className="text-sm text-white/65"><p className="mb-3 text-[10px] uppercase tracking-[.18em] text-white">Explore</p><Link className="block py-1 hover:text-white" href="/products">Products</Link><Link className="block py-1 hover:text-white" href="/about">About us</Link></div>
-        <div className="text-sm text-white/65"><p className="mb-3 text-[10px] uppercase tracking-[.18em] text-white">Stay in touch</p><p className="leading-6">Notes on thoughtful living, arriving occasionally.</p><div className="mt-4 border-b border-white/40 pb-2 text-xs text-white">YOUR EMAIL →</div></div>
+    <footer id="contact" className="bg-[#161412] px-5 py-14 text-[#f8f1e8] md:px-8 lg:px-12">
+      <div className="mx-auto grid max-w-[1440px] gap-12 md:grid-cols-[1.6fr_1fr_1fr_1fr]">
+        <div>
+          <p className="text-xl font-semibold tracking-[.28em]">SHINEYOO</p>
+          <p className="mt-5 max-w-sm text-sm leading-7 text-white/58">
+            Modern bags for women who move between work, travel, dinner, and the quiet in-between.
+          </p>
+        </div>
+
+        <div className="text-sm text-white/58">
+          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Explore</p>
+          <Link className="block py-1.5 transition hover:text-white" href="/products">
+            Shop
+          </Link>
+          <Link className="block py-1.5 transition hover:text-white" href="/#collection">
+            Collection
+          </Link>
+          <Link className="block py-1.5 transition hover:text-white" href="/about">
+            About
+          </Link>
+        </div>
+
+        <div className="text-sm text-white/58">
+          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Social</p>
+          <p className="py-1.5">Instagram</p>
+          <p className="py-1.5">Pinterest</p>
+          <p className="py-1.5">TikTok</p>
+        </div>
+
+        <div className="text-sm text-white/58">
+          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Contact</p>
+          <p className="leading-7">hello@shineyoo.shop</p>
+          <p className="mt-2 leading-7">WhatsApp inquiry available for wholesale and styling help.</p>
+        </div>
       </div>
-      <div className="mx-auto mt-14 max-w-7xl border-t border-white/15 pt-5 text-[10px] uppercase tracking-[.14em] text-white/40">© 2025 ShineYOO. Made slowly, shared widely.</div>
+
+      <div className="mx-auto mt-14 flex max-w-[1440px] flex-col gap-3 border-t border-white/12 pt-6 text-[10px] uppercase tracking-[.18em] text-white/38 md:flex-row md:items-center md:justify-between">
+        <span>© 2026 ShineYOO. All rights reserved.</span>
+        <span>Secure checkout · Worldwide shipping · Quality guarantee</span>
+      </div>
     </footer>
   );
 }
