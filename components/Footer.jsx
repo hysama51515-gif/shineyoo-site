@@ -2,45 +2,36 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[#161412] px-5 py-14 text-[#f8f1e8] md:px-8 lg:px-12">
-      <div className="mx-auto grid max-w-[1440px] gap-12 md:grid-cols-[1.6fr_1fr_1fr_1fr]">
+    <footer id="contact" className="bg-[#f7f0e7] px-6 py-16 text-stone-950 md:px-10 lg:px-14">
+      <div className="mx-auto grid max-w-[1600px] gap-12 border-t border-stone-950/12 pt-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="text-xl font-semibold tracking-[.28em]">SHINEYOO</p>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-white/58">
-            Modern bags for women who move between work, travel, dinner, and the quiet in-between.
+          <p className="text-base font-semibold uppercase tracking-[.42em]">SHINEYOO</p>
+          <p className="mt-6 max-w-sm text-sm font-light leading-7 text-stone-600">
+            A modern handbag house exploring elegance through form, texture, and restraint.
           </p>
         </div>
 
-        <div className="text-sm text-white/58">
-          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Explore</p>
-          <Link className="block py-1.5 transition hover:text-white" href="/products">
-            Shop
+        <nav className="text-[11px] font-light uppercase tracking-[.28em] text-stone-600">
+          <Link className="block py-2 transition hover:text-stone-950" href="/">
+            Home
           </Link>
-          <Link className="block py-1.5 transition hover:text-white" href="/#collection">
+          <Link className="block py-2 transition hover:text-stone-950" href="/collection">
             Collection
           </Link>
-          <Link className="block py-1.5 transition hover:text-white" href="/about">
+          <Link className="block py-2 transition hover:text-stone-950" href="/about">
             About
           </Link>
-        </div>
+        </nav>
 
-        <div className="text-sm text-white/58">
-          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Social</p>
-          <p className="py-1.5">Instagram</p>
-          <p className="py-1.5">Pinterest</p>
-          <p className="py-1.5">TikTok</p>
-        </div>
-
-        <div className="text-sm text-white/58">
-          <p className="mb-4 text-[10px] uppercase tracking-[.22em] text-white">Contact</p>
-          <p className="leading-7">hello@shineyoo.shop</p>
-          <p className="mt-2 leading-7">WhatsApp inquiry available for wholesale and styling help.</p>
+        <div className="text-sm font-light leading-7 text-stone-600">
+          <p className="text-[11px] uppercase tracking-[.28em] text-stone-950">Contact</p>
+          <p className="mt-4">hello@shineyoo.shop</p>
+          <p>Instagram · Pinterest · WeChat</p>
         </div>
       </div>
 
-      <div className="mx-auto mt-14 flex max-w-[1440px] flex-col gap-3 border-t border-white/12 pt-6 text-[10px] uppercase tracking-[.18em] text-white/38 md:flex-row md:items-center md:justify-between">
-        <span>© 2026 ShineYOO. All rights reserved.</span>
-        <span>Secure checkout · Worldwide shipping · Quality guarantee</span>
+      <div className="mx-auto mt-16 max-w-[1600px] text-[10px] font-light uppercase tracking-[.28em] text-stone-500">
+        © 2026 ShineYOO
       </div>
     </footer>
   );

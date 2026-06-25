@@ -4,12 +4,12 @@ import Footer from '../components/Footer';
 
 export const metadata = {
   metadataBase: new URL('https://shineyoo.shop'),
-  title: 'ShineYOO | Modern Women’s Bags',
+  title: 'ShineYOO | Modern Handbag House',
   description:
-    'ShineYOO designs elegant, lightweight handbags for modern women across work, daily styling, travel, and evenings out.',
+    'ShineYOO is a modern handbag house exploring timeless elegance through form, texture, and restraint.',
   openGraph: {
-    title: 'ShineYOO | Modern Women’s Bags',
-    description: 'Premium handbags with elegant structure, soft neutral tones, and daily versatility.',
+    title: 'ShineYOO | Modern Handbag House',
+    description: 'A luxury visual presentation of modern handbags, crafted with quiet elegance.',
     url: 'https://shineyoo.shop',
     siteName: 'ShineYOO',
     type: 'website',

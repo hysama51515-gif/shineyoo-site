@@ -1,47 +1,26 @@
 export const products = [
   {
-    name: 'The Atelier Tote',
-    description: 'Structured work bag with a soft suede-touch finish',
-    price: '$168',
-    note: 'Signature',
+    name: 'Atelier Tote',
+    description: 'A disciplined silhouette with generous volume and a soft architectural line.',
     image:
-      'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1200&q=88',
+      'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1600&q=90',
   },
   {
-    name: 'Luna Shoulder Bag',
-    description: 'Compact curved silhouette for day-to-night styling',
-    price: '$126',
-    note: 'New',
+    name: 'Luna Shoulder',
+    description: 'A curved shoulder form designed for evening light and precise movement.',
     image:
-      'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?auto=format&fit=crop&w=1200&q=88',
+      'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?auto=format&fit=crop&w=1600&q=90',
   },
   {
-    name: 'Muse Mini Bag',
-    description: 'Polished mini handbag with refined gold details',
-    price: '$98',
+    name: 'Muse Mini',
+    description: 'Compact, polished, and intentionally quiet — a small object with presence.',
     image:
-      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1200&q=88',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1600&q=90',
   },
   {
     name: 'Weekend Crescent',
-    description: 'Lightweight crossbody made for travel and city walks',
-    price: '$142',
+    description: 'A lightweight crossbody study in proportion, ease, and tactile restraint.',
     image:
-      'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1200&q=88',
-  },
-  {
-    name: 'Noir Box Bag',
-    description: 'Evening-ready structure with a quiet luxury profile',
-    price: '$158',
-    note: 'Limited',
-    image:
-      'https://images.unsplash.com/photo-1614179689702-355944cd0918?auto=format&fit=crop&w=1200&q=88',
-  },
-  {
-    name: 'Soft Carry Satchel',
-    description: 'Everyday capacity with an elegant folded form',
-    price: '$136',
-    image:
-      'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=1200&q=88',
+      'https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=1600&q=90',
   },
 ];
