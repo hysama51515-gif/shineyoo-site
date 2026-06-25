@@ -14,7 +14,7 @@ export default async function FeaturedProducts() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {products.map((product) => (
-            <Link key={product.id} href={`/product/${product.id}`} className="group block">
+            <Link key={product.id} href={`/products/${product.id}`} className="group block">
               <div className="relative aspect-[4/4.65] overflow-hidden bg-[#eeeeec]">
                 <Image
                   fill

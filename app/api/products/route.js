@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getProducts, saveProduct } from '../../../lib/products';
+import { getProducts, saveProduct, saveProducts } from '../../../lib/products';
 
 export const runtime = 'nodejs';
 
@@ -11,6 +11,11 @@ export async function GET() {
 export async function POST(request) {
   try {
     const body = await request.json();
+
+    if (Array.isArray(body.products)) {
+      const products = await saveProducts(body.products);
+      return NextResponse.json({ products });
+    }
 
     if (!body.title || !body.images?.length) {
       return NextResponse.json(

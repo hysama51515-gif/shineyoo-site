@@ -47,7 +47,7 @@ export default async function CollectionPage({ searchParams }) {
         <div className="mx-auto grid max-w-[1700px] gap-x-5 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {visibleProducts.map((product, index) => (
             <Link
-              href={`/product/${product.id}`}
+              href={`/products/${product.id}`}
               key={product.id}
               className={`group block ${index % 5 === 0 ? 'lg:col-span-2' : ''}`}
             >
