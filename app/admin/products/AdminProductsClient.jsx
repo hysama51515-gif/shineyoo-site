@@ -38,9 +38,13 @@ export default function AdminProductsClient({ initialProducts }) {
         price: data.price || '',
         description: data.description || '',
         category: 'Bags',
-        source_url: data.source || sourceUrl,
+        source_url: data.source_url || sourceUrl,
       });
-      setStatus(`Parsed ${data.images?.length || 0} images. Review before publishing.`);
+      setStatus(
+        `Parsed ${data.images?.length || 0} images${
+          data.sku_info?.length ? ` and ${data.sku_info.length} SKU options` : ''
+        }. Review before publishing.`,
+      );
     } catch (error) {
       setStatus(error.message);
     } finally {
