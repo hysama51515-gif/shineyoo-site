@@ -4,7 +4,7 @@
 
 :root {
   color: #171513;
-  background: #fbf8f2;
+  background: #fdfbf7;
 }
 
 * {
@@ -19,7 +19,7 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background: #fbf8f2;
+  background: #fdfbf7;
   color: #171513;
   font-family: Arial, Helvetica, 'Helvetica Neue', sans-serif;
   font-feature-settings: 'kern';
@@ -32,7 +32,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 80;
-  opacity: 0.065;
+  opacity: 0.035;
   mix-blend-mode: multiply;
   background-image:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.62'/%3E%3C/svg%3E");
@@ -61,12 +61,12 @@ a {
 }
 
 .editorial-image {
-  transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1), filter 1100ms ease;
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1), filter 1200ms ease;
 }
 
 .group:hover .editorial-image {
-  transform: scale(1.022);
-  filter: contrast(1.02) saturate(0.98);
+  transform: scale(1.018);
+  filter: contrast(1.015) saturate(0.98);
 }
 
 @keyframes softFade {

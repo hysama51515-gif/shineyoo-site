@@ -3,24 +3,16 @@ import { products } from '../data/products';
 
 export default function FeaturedProducts() {
   return (
-    <section className="bg-[#f6f0e8] px-5 py-20 md:px-8 md:py-28 lg:px-12">
-      <div className="mx-auto max-w-[1680px]">
-        <div className="mb-12 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
-          <div>
-            <p className="text-[10px] font-light uppercase tracking-[.4em] text-stone-500">Curated for you</p>
-            <h2 className="mt-4 text-3xl font-normal tracking-[-.035em] text-stone-950 md:text-5xl">
-              Featured Bags
-            </h2>
-          </div>
-          <p className="max-w-md text-sm font-light leading-7 text-stone-600">
-            Polished forms selected for daily elegance, evening proportion, and modern movement.
-          </p>
-        </div>
+    <section className="bg-[#fdfbf7] px-5 pb-24 pt-4 md:px-7 lg:px-9">
+      <div className="mx-auto max-w-[1900px]">
+        <h2 className="mb-9 text-center text-2xl font-normal tracking-[-.03em] text-stone-950 md:mb-12 md:text-3xl">
+          Curated for You
+        </h2>
 
-        <div className="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {products.map((product) => (
             <article key={product.name} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden bg-[#ebe4da]">
+              <div className="relative aspect-[4/4.65] overflow-hidden bg-[#eeeeec]">
                 <Image
                   fill
                   src={product.image}
@@ -29,9 +21,9 @@ export default function FeaturedProducts() {
                   className="editorial-image object-cover"
                 />
               </div>
-              <div className="pt-5">
-                <h3 className="text-sm font-normal uppercase tracking-[.16em] text-stone-950">{product.name}</h3>
-                <p className="mt-3 max-w-xs text-sm font-light leading-6 text-stone-600">{product.description}</p>
+              <div className="mx-auto max-w-[88%] pt-5 text-center">
+                <h3 className="text-[11px] font-semibold uppercase tracking-[.07em] text-stone-900">{product.name}</h3>
+                <p className="mt-2 text-xs font-light leading-5 text-stone-500">{product.description}</p>
               </div>
             </article>
           ))}

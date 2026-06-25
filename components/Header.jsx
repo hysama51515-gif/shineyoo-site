@@ -1,41 +1,35 @@
 import Link from 'next/link';
 
-const leftNav = [
-  { label: 'Menu', href: '/collection' },
-  { label: 'Search', href: '/collection' },
-];
-
-const rightNav = [
-  { label: 'Account', href: '/about' },
-  { label: 'Wishlist', href: '/collection' },
-  { label: 'Bag', href: '/collection' },
-];
-
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-950/8 bg-[#fbf8f2]/96 backdrop-blur-md">
-      <div className="mx-auto grid h-20 max-w-[1680px] grid-cols-3 items-center px-5 md:px-8 lg:px-12">
-        <nav className="flex items-center gap-5 text-[10px] font-light uppercase tracking-[.28em] text-stone-600 md:gap-8">
-          {leftNav.map((item) => (
-            <Link key={item.label} href={item.href} className="transition hover:text-stone-950">
-              {item.label}
-            </Link>
-          ))}
+    <header className="sticky top-0 z-50 bg-[#fdfbf7]/98">
+      <div className="relative mx-auto flex h-[86px] max-w-[1920px] items-center justify-center px-5 md:px-8">
+        <nav className="absolute left-5 flex items-center gap-5 text-[10px] font-medium uppercase tracking-[.08em] text-stone-700 md:left-8">
+          <Link href="/collection" className="leading-none transition hover:text-stone-950">
+            Menu
+          </Link>
+          <Link href="/collection" className="leading-none transition hover:text-stone-950">
+            Search
+          </Link>
         </nav>
 
         <Link
           href="/"
-          className="justify-self-center text-lg font-semibold uppercase tracking-[.44em] text-stone-950"
+          className="text-[26px] font-semibold uppercase leading-none tracking-[-.03em] text-stone-950 md:text-[30px]"
         >
           SHINEYOO
         </Link>
 
-        <nav className="hidden justify-self-end md:flex md:items-center md:gap-8 text-[10px] font-light uppercase tracking-[.28em] text-stone-600">
-          {rightNav.map((item) => (
-            <Link key={item.label} href={item.href} className="transition hover:text-stone-950">
-              {item.label}
-            </Link>
-          ))}
+        <nav className="absolute right-5 hidden items-center gap-5 text-[10px] font-medium uppercase tracking-[.08em] text-stone-700 md:right-8 md:flex">
+          <Link href="/about" className="transition hover:text-stone-950">
+            Account
+          </Link>
+          <Link href="/collection" className="transition hover:text-stone-950">
+            Wishlist
+          </Link>
+          <Link href="/collection" className="transition hover:text-stone-950">
+            Bag
+          </Link>
         </nav>
       </div>
     </header>

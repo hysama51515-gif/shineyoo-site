@@ -1,19 +1,27 @@
+import Image from 'next/image';
+
 export default function BrandStory() {
   return (
-    <section className="bg-[#fbf8f2] px-5 py-24 md:px-8 md:py-36 lg:px-12">
-      <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[0.85fr_1.15fr] md:items-start">
-        <div>
-          <p className="text-[10px] font-light uppercase tracking-[.4em] text-stone-500">Atelier notes</p>
+    <section className="bg-[#fdfbf7] px-5 py-24 md:px-7 md:py-32 lg:px-9">
+      <div className="mx-auto grid max-w-[1500px] gap-16 border-t border-stone-950/10 pt-20 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-[520px] overflow-hidden bg-[#eeeeec] md:mx-0">
+          <Image
+            fill
+            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1500&q=90"
+            alt="ShineYOO editorial atelier mood"
+            sizes="(max-width: 768px) 100vw, 42vw"
+            className="editorial-image object-cover"
+          />
         </div>
 
-        <div className="max-w-4xl">
-          <h2 className="text-4xl font-normal leading-[1.05] tracking-[-.045em] text-stone-950 md:text-6xl">
+        <div className="mx-auto max-w-2xl text-center md:text-left">
+          <p className="text-[10px] font-semibold uppercase tracking-[.08em] text-stone-500">Atelier notes</p>
+          <h2 className="mt-7 text-4xl font-normal leading-[1.08] tracking-[-.04em] text-stone-950 md:text-6xl">
             Quiet luxury, carried lightly.
           </h2>
-          <p className="mt-8 max-w-2xl text-base font-light leading-8 text-stone-600 md:text-lg md:leading-9">
-            ShineYOO designs for modern women who move with intention. Each handbag is composed through
-            proportion, tactile restraint, and daily ease — a considered object that completes a silhouette
-            without overpowering it.
+          <p className="mt-8 text-base font-light leading-8 text-stone-600 md:text-lg md:leading-9">
+            ShineYOO designs handbags for modern women through proportion, tactile restraint, and daily ease.
+            Each piece is composed to complete a silhouette with calm precision.
           </p>
         </div>
       </div>
