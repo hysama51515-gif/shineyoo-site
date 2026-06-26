@@ -35,8 +35,9 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error:
-          'Product could not be created. Local JSON writes work in development. On Vercel, configure GITHUB_TOKEN/GITHUB_REPO for persistent publishing.',
+          '线上上架失败：Vercel 不能直接写入 data/products.json。请在 Vercel 环境变量配置 GITHUB_TOKEN 和 GITHUB_REPO 后重新部署，商品才能自动写回 GitHub 并显示在独立站。',
         detail: error.message,
+        required_env: ['GITHUB_TOKEN', 'GITHUB_REPO'],
       },
       { status: 500 },
     );
