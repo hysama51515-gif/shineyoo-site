@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { getProducts } from '../../lib/products';
+import SafeImage from '../../components/SafeImage';
 
 const categories = ['Bags', 'New', 'Evening', 'Accessories'];
 
@@ -52,12 +52,11 @@ export default async function CollectionPage({ searchParams }) {
               className={`group block ${index % 5 === 0 ? 'lg:col-span-2' : ''}`}
             >
               <div className="relative aspect-[4/5] overflow-hidden bg-[#eeeeec]">
-                <Image
-                  fill
-                  src={product.image || product.images[0]}
+                <SafeImage
+                  src={product.main_image || product.image || product.images?.[0] || product.all_images?.[0]}
+                  images={product.images}
                   alt={`ShineYOO ${product.title}`}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="editorial-image object-cover"
+                  className="editorial-image h-full w-full object-cover"
                 />
               </div>
               <div className="mt-5 flex items-start justify-between gap-6">

@@ -2,6 +2,7 @@ import { existsSync } from 'fs';
 import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer-core';
 import { NextResponse } from 'next/server';
+import { cleanImageList } from '../../../lib/imageUtils';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -133,7 +134,7 @@ export async function POST(request) {
     });
 
     const fallback = parseHtmlFallback(parsed.html);
-    const images = uniqueImages([...(parsed.images || []), ...fallback.images]).slice(0, 12);
+    const images = cleanImageList(uniqueImages([...(parsed.images || []), ...fallback.images]), 30);
     const title = tidyText(parsed.title || fallback.title || 'Imported 1688 Product');
 
     if (!title && images.length === 0) {

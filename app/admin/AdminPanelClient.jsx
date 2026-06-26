@@ -1,6 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import SafeImage from '../../components/SafeImage';
+import { cleanImageList } from '../../lib/imageUtils';
 
 const groups = [
   ['main_images', 'Main images'],
@@ -41,17 +43,31 @@ export default function AdminPanelClient({ initialProducts }) {
 
       if (!response.ok) throw new Error(data.error || '1688 parsing failed.');
 
+      const cleanedData = {
+        ...data,
+        images: cleanImageList(data.images || [], 60),
+        main_images: cleanImageList(data.main_images || [], 12),
+        detail_images: cleanImageList(data.detail_images || [], 60),
+        sku_images: cleanImageList(data.sku_images || [], 20),
+        all_images: cleanImageList(data.all_images || data.images || [], 80),
+      };
+
+      console.log('[SHINEYOO admin parse images]', {
+        raw: data,
+        cleaned: cleanedData,
+      });
+
       const initialImages = dedupe([
-        ...(data.main_images || []),
-        ...(data.detail_images || []),
-        ...(data.sku_images || []),
+        ...(cleanedData.main_images || []),
+        ...(cleanedData.detail_images || []),
+        ...(cleanedData.sku_images || []),
       ]).slice(0, 30);
 
-      setProductData(data);
-      setTitle(data.title || '');
+      setProductData(cleanedData);
+      setTitle(cleanedData.title || '');
       setSelectedImages(initialImages);
       setStatus(
-        `Fetched ${data.all_images?.length || data.images?.length || 0} images. Selected ${initialImages.length}.`,
+        `Fetched ${cleanedData.all_images?.length || cleanedData.images?.length || 0} clean product images. Selected ${initialImages.length}.`,
       );
     } catch (error) {
       setStatus(error.message);
@@ -175,8 +191,7 @@ export default function AdminPanelClient({ initialProducts }) {
                     index === 0 ? 'ring-stone-950' : 'ring-stone-200'
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={image} alt="" className="h-full w-full object-cover" />
+                  <SafeImage src={image} images={selectedImages} alt="" className="h-full w-full object-cover" />
                   <button
                     type="button"
                     onClick={() => removeSelected(image)}
@@ -210,8 +225,12 @@ export default function AdminPanelClient({ initialProducts }) {
             {products.slice(0, 8).map((product) => (
               <div key={product.id} className="flex items-center gap-4 border-b border-stone-200 pb-3">
                 <div className="h-14 w-14 overflow-hidden bg-stone-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={product.image || product.images?.[0]} alt="" className="h-full w-full object-cover" />
+                  <SafeImage
+                    src={product.main_image || product.image || product.images?.[0] || product.all_images?.[0]}
+                    images={product.images}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm text-stone-950">{product.title}</p>
@@ -267,8 +286,12 @@ function ImageGroup({ label, images, selectedSet, onToggle }) {
                 selected ? 'ring-2 ring-stone-950' : 'ring-stone-200 hover:ring-stone-500'
               }`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+              <SafeImage
+                src={image}
+                images={visibleImages}
+                alt=""
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              />
               <span
                 className={`absolute left-2 top-2 grid h-6 w-6 place-items-center rounded-full text-[10px] ${
                   selected ? 'bg-stone-950 text-white' : 'bg-white/90 text-stone-500'
@@ -285,5 +308,5 @@ function ImageGroup({ label, images, selectedSet, onToggle }) {
 }
 
 function dedupe(images) {
-  return Array.from(new Set((images || []).filter(Boolean)));
+  return cleanImageList(Array.from(new Set((images || []).filter(Boolean))), 80);
 }

@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import SafeImage from '../../../components/SafeImage';
 import { getProductById, getProducts } from '../../../lib/products';
 
 export async function generateStaticParams() {
@@ -21,30 +21,36 @@ export default async function ProductDetailPage({ params }) {
   const product = await getProductById(params.id);
   if (!product) notFound();
 
-  const images = product.images?.length ? product.images : [product.image];
+  const images = product.images?.length
+    ? product.images
+    : product.main_images?.length
+      ? product.main_images
+      : product.all_images?.length
+        ? product.all_images
+        : [product.image].filter(Boolean);
 
   return (
     <section className="grid min-h-screen bg-[#fdfbf7] lg:grid-cols-[1.12fr_0.88fr]">
       <div className="grid gap-px bg-[#fdfbf7] lg:grid-cols-2">
         <div className="relative col-span-full min-h-[72vh] bg-[#f2f1ef]">
-          <Image
-            priority
-            fill
-            src={images[0]}
-            alt={product.title}
-            sizes="(max-width: 1024px) 100vw, 56vw"
-            className="object-contain p-8 md:p-16"
-          />
+          {images[0] && (
+            <SafeImage
+              src={images[0]}
+              images={images}
+              alt={product.title}
+              loading="eager"
+              className="h-full min-h-[72vh] w-full object-contain p-8 md:p-16"
+            />
+          )}
         </div>
 
         {images.slice(1, 5).map((image, index) => (
           <div key={`${image}-${index}`} className="relative min-h-[48vh] bg-[#eeeeec]">
-            <Image
-              fill
+            <SafeImage
               src={image}
+              images={images}
               alt={`${product.title} detail ${index + 1}`}
-              sizes="(max-width: 1024px) 50vw, 28vw"
-              className="object-cover"
+              className="h-full min-h-[48vh] w-full object-cover"
             />
           </div>
         ))}
@@ -84,7 +90,7 @@ export default async function ProductDetailPage({ params }) {
           <div className="mt-10">
             <div className="flex items-center justify-between border-b border-stone-200 pb-4">
               <h2 className="text-base uppercase tracking-[.08em] text-stone-950">Product details</h2>
-              <span>⌄</span>
+              <span>＋</span>
             </div>
             <p className="mt-6 text-sm leading-7 text-stone-600">
               {product.description} Curated into the SHINEYOO catalogue with an editorial product presentation

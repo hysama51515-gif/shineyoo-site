@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import SafeImage from '../../components/SafeImage';
 
 export const metadata = {
   title: 'About | ShineYOO',
@@ -19,12 +19,11 @@ export default function AboutPage() {
 
       <section className="grid min-h-screen bg-[#fbf7f0] md:grid-cols-2">
         <div className="relative min-h-[70vh] overflow-hidden">
-          <Image
-            fill
+          <SafeImage
             src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=90"
+            images={['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=90']}
             alt="ShineYOO editorial fashion mood"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
+            className="h-full min-h-[70vh] w-full object-cover"
           />
           <div className="absolute inset-0 bg-black/10" />
         </div>

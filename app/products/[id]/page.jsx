@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import SafeImage from '../../../components/SafeImage';
 import { getProductById, getProducts } from '../../../lib/products';
 
 export async function generateStaticParams() {
@@ -21,7 +21,13 @@ export default async function LuxuryProductPage({ params }) {
   const product = await getProductById(params.id);
   if (!product) notFound();
 
-  const images = product.images?.length ? product.images : [product.image].filter(Boolean);
+  const images = product.images?.length
+    ? product.images
+    : product.main_images?.length
+      ? product.main_images
+      : product.all_images?.length
+        ? product.all_images
+        : [product.image].filter(Boolean);
 
   return (
     <main className="min-h-screen bg-[#f7f3ec] text-stone-950">
@@ -29,25 +35,23 @@ export default async function LuxuryProductPage({ params }) {
         <div className="grid gap-px bg-[#ebe7df] lg:grid-cols-2">
           <figure className="relative col-span-full min-h-[72vh] bg-[#f2eee6]">
             {images[0] && (
-              <Image
-                priority
-                fill
+              <SafeImage
                 src={images[0]}
+                images={images}
                 alt={product.title}
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-contain p-10 md:p-20"
+                loading="eager"
+                className="h-full min-h-[72vh] w-full object-contain p-10 md:p-20"
               />
             )}
           </figure>
 
           {images.slice(1, 5).map((image, index) => (
             <figure key={`${image}-${index}`} className="relative min-h-[46vh] overflow-hidden bg-[#eee9df]">
-              <Image
-                fill
+              <SafeImage
                 src={image}
+                images={images}
                 alt={`${product.title} editorial detail ${index + 1}`}
-                sizes="(max-width: 1024px) 50vw, 29vw"
-                className="object-cover transition duration-700 hover:scale-[1.025]"
+                className="h-full min-h-[46vh] w-full object-cover transition duration-700 hover:scale-[1.025]"
               />
             </figure>
           ))}
@@ -93,7 +97,7 @@ export default async function LuxuryProductPage({ params }) {
             <section className="mt-10">
               <div className="flex items-center justify-between border-b border-stone-200 pb-4">
                 <h2 className="text-sm uppercase tracking-[.14em]">Product details</h2>
-                <span>⌄</span>
+                <span>＋</span>
               </div>
               <p className="mt-6 text-sm font-light leading-7 text-stone-600">
                 {product.description} Presented in a restrained SHINEYOO visual system with generous spacing,

@@ -1,16 +1,15 @@
-import Image from 'next/image';
+import SafeImage from './SafeImage';
 
 export default function BrandStory() {
   return (
     <section className="bg-[#fdfbf7] px-5 py-24 md:px-7 md:py-32 lg:px-9">
       <div className="mx-auto grid max-w-[1500px] gap-16 border-t border-stone-950/10 pt-20 md:grid-cols-[0.9fr_1.1fr] md:items-center">
         <div className="relative mx-auto aspect-[4/5] w-full max-w-[520px] overflow-hidden bg-[#eeeeec] md:mx-0">
-          <Image
-            fill
+          <SafeImage
             src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1500&q=90"
+            images={['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1500&q=90']}
             alt="ShineYOO editorial atelier mood"
-            sizes="(max-width: 768px) 100vw, 42vw"
-            className="editorial-image object-cover"
+            className="editorial-image h-full w-full object-cover"
           />
         </div>
 

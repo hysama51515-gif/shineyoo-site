@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import SafeImage from './SafeImage';
 
 const categories = [
   {
@@ -52,13 +52,12 @@ export default function CategoryGrid() {
         {categories.map((category) => (
           <Link key={category.title} href={category.href} className="group block">
             <div className="relative aspect-[4/5] overflow-hidden bg-[#eeeeec]">
-              <Image
-                fill
-                priority={category.title === 'Bags'}
+              <SafeImage
                 src={category.image}
+                images={[category.image]}
                 alt={`ShineYOO ${category.title}`}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="editorial-image object-cover"
+                loading={category.title === 'Bags' ? 'eager' : 'lazy'}
+                className="editorial-image h-full w-full object-cover"
               />
             </div>
             <p className="mt-5 text-center text-[10px] font-semibold uppercase tracking-[.05em] text-stone-800">

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { cleanImageList } from '../../../../lib/imageUtils';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -35,7 +36,7 @@ export async function POST(request) {
       );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(cleanParsedProduct(data, url));
   } catch (error) {
     return NextResponse.json(
       {
@@ -45,4 +46,34 @@ export async function POST(request) {
       { status: 500 },
     );
   }
+}
+
+function cleanParsedProduct(data, fallbackUrl) {
+  const mainImages = cleanImageList(data.main_images || [], 12);
+  const skuImages = cleanImageList(data.sku_images || [], 20);
+  const allImages = cleanImageList(
+    [
+      ...(data.images || []),
+      ...(data.main_images || []),
+      ...(data.detail_images || []),
+      ...(data.sku_images || []),
+      ...(data.all_images || []),
+    ],
+    80,
+  );
+
+  const mainSet = new Set(mainImages);
+  const detailImages = cleanImageList(data.detail_images || [], 60).filter((image) => !mainSet.has(image));
+  const mergedImages = cleanImageList([...mainImages, ...detailImages, ...skuImages, ...allImages], 60);
+
+  return {
+    ...data,
+    title: data.title || 'Imported handbag',
+    images: mergedImages,
+    main_images: mainImages.length ? mainImages : mergedImages.slice(0, 8),
+    detail_images: detailImages.length ? detailImages : mergedImages.slice(mainImages.length || 1, 40),
+    sku_images: skuImages,
+    all_images: allImages.length ? allImages : mergedImages,
+    url: data.url || fallbackUrl,
+  };
 }

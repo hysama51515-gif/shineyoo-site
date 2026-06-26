@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { getProducts } from '../lib/products';
+import SafeImage from './SafeImage';
 
 export default async function FeaturedProducts() {
   const products = (await getProducts()).slice(0, 4);
@@ -16,12 +16,11 @@ export default async function FeaturedProducts() {
           {products.map((product) => (
             <Link key={product.id} href={`/products/${product.id}`} className="group block">
               <div className="relative aspect-[4/4.65] overflow-hidden bg-[#eeeeec]">
-                <Image
-                  fill
-                  src={product.image || product.images[0]}
+                <SafeImage
+                  src={product.main_image || product.image || product.images?.[0] || product.all_images?.[0]}
+                  images={product.images}
                   alt={`ShineYOO ${product.title}`}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="editorial-image object-cover"
+                  className="editorial-image h-full w-full object-cover"
                 />
               </div>
               <div className="mx-auto max-w-[88%] pt-5 text-center">

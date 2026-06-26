@@ -1,16 +1,15 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import SafeImage from './SafeImage';
 
 export default function ProductCard({ product }) {
   return (
     <article className="group">
       <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#e8ded0] shadow-[0_22px_70px_rgba(50,39,28,0.10)]">
-        <Image
-          src={product.image}
+        <SafeImage
+          src={product.main_image || product.image || product.images?.[0] || product.all_images?.[0]}
+          images={product.images}
           alt={product.name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="image-zoom object-cover"
+          className="image-zoom h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/28 via-black/0 to-white/10 opacity-80" />
         {product.note && (
